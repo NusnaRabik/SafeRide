@@ -10,4 +10,10 @@ private:
     MPU6050 mpu;
     float threshold;
 
+public:
+    // Constructor to set the vibration threshold
+    MotionDetector(float thresh) {
+        threshold = thresh;
+    }
+
 #endif
