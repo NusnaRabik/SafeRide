@@ -3,6 +3,11 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <Gyroscopesensor.h>
-// ... (code)
+#include <MPU6050.h>
+
+class MotionDetector {
+private:
+    MPU6050 mpu;
+    float threshold;
+
 #endif
