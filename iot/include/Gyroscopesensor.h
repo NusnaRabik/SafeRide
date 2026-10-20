@@ -16,4 +16,10 @@ public:
         threshold = thresh;
     }
 
+    // Initialize the MPU6050 sensor
+    bool initSensor() {
+        mpu.initialize();
+        return mpu.testConnection();
+    }
+
 #endif
