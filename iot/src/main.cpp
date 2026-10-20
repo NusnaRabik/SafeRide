@@ -1,20 +1,15 @@
 #include <Arduino.h>
+#include "Gyroscopesensor.h" // Include the MPU6050 gyroscope class
+
+// Instantiate MotionDetector object with a vibration threshold of 2.5
+MotionDetector bikeSensor(2.5);
 
 void setup() {
-    // Initialize Serial Monitor to communicate with the computer
+    // Initialize serial communication for debugging
     Serial.begin(115200);
-    delay(1000); // Give some time for the serial monitor to open
-
-    Serial.println("----------------------------------------");
-    Serial.println("ESP32 Base System Started Successfully!");
-    Serial.println("System status: No sensors connected yet.");
-    Serial.println("----------------------------------------");
 }
 
 void loop() {
-    // Basic heartbeat message to verify the core system is running
-    Serial.println("Core system is running smoothly...");
-    
-    // Wait for 1 second
+    // Empty loop for now
     delay(1000);
 }
