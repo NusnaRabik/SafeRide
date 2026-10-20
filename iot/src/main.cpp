@@ -18,6 +18,7 @@ void setup() {
         while (1) {
             delay(10); // Halt program execution if sensor initialization fails
         }
+    }
 }
 
 void loop() {
@@ -29,4 +30,5 @@ void loop() {
     }
     // Empty loop for now
     delay(1000);
+   
 }
