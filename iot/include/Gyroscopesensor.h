@@ -22,4 +22,19 @@ public:
         return mpu.testConnection();
     }
 
+    // Check if sudden vibration or impact is detected
+    bool isVibrationDetected() {
+        int16_t ax, ay, az;
+        mpu.getAcceleration(&ax, &ay, &az);
+        
+        // Simple threshold check based on accelerometer values
+        float totalAccel = sqrt(pow(ax, 2) + pow(ay, 2) + pow(az, 2)) / 16384.0;
+        
+        if (totalAccel > threshold) {
+            return true;
+        }
+        return false;
+    }
+};
+
 #endif
