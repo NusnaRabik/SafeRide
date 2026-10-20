@@ -1,18 +1,20 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
-
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    // Initialize Serial Monitor to communicate with the computer
+    Serial.begin(115200);
+    delay(1000); // Give some time for the serial monitor to open
+
+    Serial.println("----------------------------------------");
+    Serial.println("ESP32 Base System Started Successfully!");
+    Serial.println("System status: No sensors connected yet.");
+    Serial.println("----------------------------------------");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    // Basic heartbeat message to verify the core system is running
+    Serial.println("Core system is running smoothly...");
+    
+    // Wait for 1 second
+    delay(1000);
 }
