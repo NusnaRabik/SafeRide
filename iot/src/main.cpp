@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Wire.h>
 #include "Gyroscopesensor.h" // Include the MPU6050 gyroscope class
 
 // Instantiate MotionDetector object with a vibration threshold of 2.5
@@ -20,6 +21,12 @@ void setup() {
 }
 
 void loop() {
+    // Check if sudden vibration or impact is detected by the sensor
+    if (bikeSensor.isVibrationDetected()) {
+        Serial.println("ALERT: Sudden vibration or impact detected!");
+    } else {
+        Serial.println("Status: Normal riding conditions");
+    }
     // Empty loop for now
     delay(1000);
 }
