@@ -60,3 +60,6 @@ desktop.ini
 *.tmp
 *.temp
 *.bak
+
+/backend/.env.example
+/mobile-app/.env.example
