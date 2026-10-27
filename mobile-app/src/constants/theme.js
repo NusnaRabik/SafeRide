@@ -18,7 +18,15 @@ export const colors = {
   onSurface: '#041b3c',
   onSurfaceVariant: '#42474e',
   outline: '#73777f',
+  outlineVariant: '#c2c7cf',
   error: '#ba1a1a',
+  // Accident History screen
+  danger: '#dc2626',
+  dangerSurface: '#fef2f2',
+  success: '#22a06b',
+  successSurface: 'rgba(34,160,107,0.1)',
+  border: '#f1f5f9',
+  chevron: '#94a3b8',
 };
 
 export const fonts = {

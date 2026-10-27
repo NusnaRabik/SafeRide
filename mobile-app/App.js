@@ -8,6 +8,8 @@ import { HankenGrotesk_400Regular, HankenGrotesk_500Medium } from '@expo-google-
 
 import EmergencyContactsScreen from './src/screens/contacts/EmergencyContactsScreen';
 import RideHistoryScreen from './src/screens/ride/RideHistoryScreen';
+import AccidentHistoryScreen from './src/screens/incidents/AccidentHistoryScreen';
+import SettingsScreen from './src/screens/profile/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,9 +29,11 @@ export default function App() {
       <NavigationContainer>
         <StatusBar style="dark" />
         {/* Temporary: initialRouteName is the screen you are testing. Change it to Login/Home later. */}
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="RideHistory">
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Settings">
           <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
           <Stack.Screen name="RideHistory" component={RideHistoryScreen} />
+          <Stack.Screen name="AccidentHistory" component={AccidentHistoryScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

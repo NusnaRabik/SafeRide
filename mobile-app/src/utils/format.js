@@ -30,3 +30,10 @@ export const formatRideCount = (n) => `${n} ${n === 1 ? 'Ride' : 'Rides'}`;
 
 // "Home (Baseline Road)" -> "Home"
 export const shortPlace = (name) => name.split(' (')[0];
+
+// "18 Oct 2026 • 10:14 AM"
+export const formatIncidentDate = (iso) => {
+  const d = new Date(iso);
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${day} ${MONTHS[d.getMonth()]} ${d.getFullYear()} • ${formatTime(d)}`;
+};
