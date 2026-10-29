@@ -14,6 +14,9 @@ void setup() {
     Serial.begin(115200);
     Wire.begin();
 
+    // Initialize GPS communication
+    gpsTracker.begin(9600);
+
     // Initialize MPU6050 gyroscope sensor
     if (!bikeSensor.initSensor()) {
         Serial.println("Error: MPU6050 Sensor not found! Check wiring.");
