@@ -14,9 +14,8 @@ public:
         pinMode(touchPin, INPUT);
     }
 
-    // Check if the handlebar is touched by the rider
+    // Check if the handlebar is touched
     bool isTouched() {
-        // TTP223 usually outputs HIGH when touched
         if (digitalRead(touchPin) == HIGH) {
             return true;
         }
