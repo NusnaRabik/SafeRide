@@ -25,7 +25,7 @@ void setup() {
         }
     }
 
-    Serial.println("System Initialized Successfully! Ready for Monitoring.");
+    Serial.println("System Initialized Successfully! MPU6050, Touch & GPS Ready.");
 }
 
 void loop() {
