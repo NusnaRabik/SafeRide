@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include "Gyroscopesensor.h"
 #include "Touchsensor.h"
+#include "GpsSensor.h"
 
 // Instantiate Objects
 MotionDetector bikeSensor(1.0);      // MPU6050 vibration threshold
