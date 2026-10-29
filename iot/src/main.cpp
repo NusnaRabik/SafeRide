@@ -8,6 +8,7 @@
 MotionDetector bikeSensor(1.0);      // MPU6050 vibration threshold
 TouchDetector leftTouch(4);         // Left Handle Touch Sensor on GPIO 4
 TouchDetector rightTouch(5);        // Right Handle Touch Sensor on GPIO 5
+GpsSensor gpsTracker(Serial2);      // GPS Module connected to Serial2 (RX: 16, TX: 17)
 
 void setup() {
     Serial.begin(115200);
