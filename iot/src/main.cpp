@@ -29,6 +29,10 @@ void setup() {
 }
 
 void loop() {
+
+    // Continuously update GPS data in the background
+    gpsTracker.update();
+
     // 1. Read touch sensors state (true if touched, false if not touched)
     bool leftTouched = leftTouch.isTouched();
     bool rightTouched = rightTouch.isTouched();
@@ -41,6 +45,16 @@ void loop() {
     // AND sudden vibration/impact is detected.
     if (!leftTouched && !rightTouched && vibrationDetected) {
         Serial.println("ACCIDENT DETECTED! Rider hands are off handles and impact occurred!");
+        // Check if GPS has a valid lock and print coordinates
+        if (gpsTracker.isLocationValid()) {
+            Serial.print("Emergency Location Lat: ");
+            Serial.println(gpsTracker.getLatitude(), 6);
+            Serial.print("Emergency Location Lng: ");
+            Serial.println(gpsTracker.getLongitude(), 6);
+        } else {
+            Serial.println("Warning: GPS Location fix not acquired yet (No satellite lock).");
+        }
+        Serial.println("----------------------------------------");
     } else {
         Serial.println("Status: Normal riding conditions");
     }
