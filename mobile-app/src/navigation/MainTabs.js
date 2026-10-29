@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,31 +6,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { colors, fonts } from '../constants/theme';
 import HomeScreen from '../screens/home/HomeScreen';
+import RideHistoryScreen from '../screens/ride/RideHistoryScreen';
+import AccidentHistoryScreen from '../screens/incidents/AccidentHistoryScreen';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-// Placeholder for screens not included in this shared project
-const createPlaceholder = (title) => {
-  return function PlaceholderScreen() {
-    return (
-      <View style={styles.placeholder}>
-        <Text style={styles.placeholderText}>
-          {title} - Coming Soon
-        </Text>
-      </View>
-    );
-  };
-};
-
-const RidePlaceholder = createPlaceholder('Ride');
-const AlertsPlaceholder = createPlaceholder('Alerts');
-const ProfilePlaceholder = createPlaceholder('Profile');
+// TODO: show the red dot only when there are unread alerts
+const HAS_UNREAD_ALERTS = true;
 
 const TABS = [
   { name: 'Home', label: 'Home', icon: 'home', component: HomeScreen },
-  { name: 'Ride', label: 'Ride', icon: 'speed', component: RidePlaceholder },
-  { name: 'Alerts', label: 'Alerts', icon: 'warning', component: AlertsPlaceholder },
-  { name: 'Profile', label: 'Profile', icon: 'person', component: ProfilePlaceholder },
+  { name: 'Ride', label: 'Ride', icon: 'speed', component: RideHistoryScreen },
+  { name: 'Alerts', label: 'Alerts', icon: 'warning', component: AccidentHistoryScreen, badge: HAS_UNREAD_ALERTS },
+  { name: 'Profile', label: 'Profile', icon: 'person', component: ProfileScreen },
 ];
 
 export default function MainTabs() {
@@ -64,26 +52,15 @@ export default function MainTabs() {
           component={t.component}
           options={{
             tabBarLabel: ({ focused, color }) => (
-              <Text
-                style={[
-                  styles.label,
-                  {
-                    color,
-                    fontFamily: focused
-                      ? fonts.manropeBold
-                      : fonts.manropeSemi,
-                  },
-                ]}
-              >
+              <Text style={[styles.label, { color, fontFamily: focused ? fonts.manropeBold : fonts.manropeSemi }]}>
                 {t.label}
               </Text>
             ),
             tabBarIcon: ({ color }) => (
-              <MaterialIcons
-                name={t.icon}
-                size={24}
-                color={color}
-              />
+              <View>
+                <MaterialIcons name={t.icon} size={24} color={color} />
+                {t.badge && <View style={styles.dot} />}
+              </View>
             ),
           }}
         />
@@ -93,22 +70,9 @@ export default function MainTabs() {
 }
 
 const styles = StyleSheet.create({
-  label: {
-    fontSize: 12,
-    letterSpacing: 0.5,
-    marginTop: 2,
-  },
-
-  placeholder: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.background,
-  },
-
-  placeholderText: {
-    fontFamily: fonts.manropeSemi,
-    fontSize: 16,
-    color: colors.onSurfaceVariant,
+  label: { fontSize: 12, letterSpacing: 0.5, marginTop: 2 },
+  dot: {
+    position: 'absolute', top: 0, right: 0, width: 8, height: 8, borderRadius: 4,
+    backgroundColor: colors.error, borderWidth: 2, borderColor: colors.background,
   },
 });
