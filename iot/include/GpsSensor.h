@@ -24,3 +24,21 @@ public:
             gps.encode(gpsSerial.read());
         }
     }
+
+    // Check if valid GPS coordinates are available
+    bool isLocationValid() {
+        return gps.location.isValid();
+    }
+
+    // Get Latitude
+    double getLatitude() {
+        return gps.location.lat();
+    }
+
+    // Get Longitude
+    double getLongitude() {
+        return gps.location.lng();
+    }
+};
+
+#endif
