@@ -1,34 +1,45 @@
 #include <Arduino.h>
 #include <Wire.h>
-#include "Gyroscopesensor.h" // Include the MPU6050 gyroscope class
+#include "Gyroscopesensor.h"
+#include "Touchsensor.h"
 
-// Instantiate MotionDetector object with a vibration threshold of 2.5
-MotionDetector bikeSensor(2.5);
+// Instantiate Objects
+MotionDetector bikeSensor(1.0);      // MPU6050 vibration threshold
+TouchDetector leftTouch(4);         // Left Handle Touch Sensor on GPIO 4
+TouchDetector rightTouch(5);        // Right Handle Touch Sensor on GPIO 5
 
 void setup() {
-    // Initialize serial communication for debugging
     Serial.begin(115200);
-
-    // Initialize I2C communication for the MPU6050 sensor (SDA, SCL)
     Wire.begin();
 
-    // Initialize the gyroscope sensor and verify its physical connection
+    // Initialize MPU6050 gyroscope sensor
     if (!bikeSensor.initSensor()) {
         Serial.println("Error: MPU6050 Sensor not found! Check wiring.");
         while (1) {
-            delay(10); // Halt program execution if sensor initialization fails
+            delay(10);
         }
     }
+
+    Serial.println("System Initialized Successfully! Ready for Monitoring.");
 }
 
 void loop() {
-    // Check if sudden vibration or impact is detected by the sensor
-    if (bikeSensor.isVibrationDetected()) {
-        Serial.println("ALERT: Sudden vibration or impact detected!");
+    // 1. Read touch sensors state (true if touched, false if not touched)
+    bool leftTouched = leftTouch.isTouched();
+    bool rightTouched = rightTouch.isTouched();
+
+    // 2. Read vibration sensor state
+    bool vibrationDetected = bikeSensor.isVibrationDetected();
+
+    // 3. Accident Condition: 
+    // Both touch sensors are NOT touched (!leftTouched && !rightTouched) 
+    // AND sudden vibration/impact is detected.
+    if (!leftTouched && !rightTouched && vibrationDetected) {
+        Serial.println("ACCIDENT DETECTED! Rider hands are off handles and impact occurred!");
     } else {
         Serial.println("Status: Normal riding conditions");
     }
-    // Empty loop for now
-    delay(1000);
-   
+
+    // Small delay between readings
+    delay(500);
 }
