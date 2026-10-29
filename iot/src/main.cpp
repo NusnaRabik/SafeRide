@@ -4,7 +4,7 @@
 #include "Touchsensor.h"
 
 // Instantiate Objects
-MotionDetector bikeSensor(2.5);      // MPU6050 vibration threshold
+MotionDetector bikeSensor(1.0);      // MPU6050 vibration threshold
 TouchDetector leftTouch(4);         // Left Handle Touch Sensor on GPIO 4
 TouchDetector rightTouch(5);        // Right Handle Touch Sensor on GPIO 5
 
