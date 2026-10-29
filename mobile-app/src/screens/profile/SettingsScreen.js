@@ -69,9 +69,7 @@ export default function SettingsScreen({ navigation }) {
           <LinkRow
             title="Edit Profile"
             description="Update rider name, email, and phone number"
-            onPress={() => {
-              // TODO: navigation.navigate('EditProfile') once that screen exists
-            }}
+            onPress={() => navigation?.navigate('EditProfile')}
           />
         </SectionCard>
 
