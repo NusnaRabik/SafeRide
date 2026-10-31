@@ -10,6 +10,7 @@ import PreRideTabs from '../../components/preRide/PreRideTabs';
 import ReadinessBanner from '../../components/preRide/ReadinessBanner';
 import SafetyChecklist from '../../components/preRide/SafetyChecklist';
 import RideSafetyTipCard from '../../components/preRide/RideSafetyTipCard';
+import StartRideButton from '../../components/preRide/StartRideButton';
 
 export default function PreRideCheckScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState('ready');
@@ -32,6 +33,10 @@ export default function PreRideCheckScreen({ navigation }) {
 
   const handleContacts = () => {
     navigation?.navigate('EmergencyContacts');
+  };
+
+  const handleStartRide = () => {
+    navigation?.navigate('ActiveRide');
   };
 
   const allPassed = helmet.connected && contacts.length > 0;
@@ -61,7 +66,11 @@ export default function PreRideCheckScreen({ navigation }) {
         {/* Part 5: Ride Safety Advisory Tip Card */}
         <RideSafetyTipCard />
 
-        {/* Further parts (CTA button, footnote) will be appended here */}
+        {/* Part 6: Dynamic Call-to-Action & Advisory Footnote */}
+        <StartRideButton
+          disabled={!allPassed}
+          onPress={handleStartRide}
+        />
       </ScrollView>
     </SafeAreaView>
   );
