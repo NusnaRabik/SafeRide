@@ -13,7 +13,7 @@ GpsSensor gpsTracker(Serial2);      // GPS Module connected to Serial2 (RX: 16, 
 void setup() {
     Serial.begin(115200);
     Wire.begin();
-
+    
     // Initialize GPS communication
     gpsTracker.begin(9600);
 
@@ -25,15 +25,14 @@ void setup() {
         }
     }
 
-    Serial.println("System Initialized Successfully! MPU6050, Touch & GPS Ready.");
+    Serial.println("System Initialized Successfully! MPU6050, Touch & GY-GPS6MV2 Ready.");
 }
 
 void loop() {
-
     // Continuously update GPS data in the background
     gpsTracker.update();
 
-    // 1. Read touch sensors state (true if touched, false if not touched)
+    // 1. Read both touch sensors state
     bool leftTouched = leftTouch.isTouched();
     bool rightTouched = rightTouch.isTouched();
 
@@ -44,7 +43,9 @@ void loop() {
     // Both touch sensors are NOT touched (!leftTouched && !rightTouched) 
     // AND sudden vibration/impact is detected.
     if (!leftTouched && !rightTouched && vibrationDetected) {
+        Serial.println("----------------------------------------");
         Serial.println("ACCIDENT DETECTED! Rider hands are off handles and impact occurred!");
+
         // Check if GPS has a valid lock and print coordinates
         if (gpsTracker.isLocationValid()) {
             Serial.print("Emergency Location Lat: ");
@@ -59,6 +60,6 @@ void loop() {
         Serial.println("Status: Normal riding conditions");
     }
 
-    // Small delay between readings
-    delay(500);
+    // Delay between loop iterations
+    delay(1000);
 }
