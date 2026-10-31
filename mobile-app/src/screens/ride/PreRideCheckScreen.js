@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing } from '../../constants/theme';
 import PreRideHeader from '../../components/preRide/PreRideHeader';
 import PreRideTabs from '../../components/preRide/PreRideTabs';
+import ReadinessBanner from '../../components/preRide/ReadinessBanner';
 
 export default function PreRideCheckScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState('ready');
@@ -28,7 +29,10 @@ export default function PreRideCheckScreen({ navigation }) {
         {/* Part 2: Segmented Filter Tabs */}
         <PreRideTabs activeTab={activeTab} onSelectTab={setActiveTab} />
 
-        {/* Further parts (readiness banner, checklist, tip card, CTA) will be appended here */}
+        {/* Part 3: Readiness Summary Banner */}
+        <ReadinessBanner isReady={activeTab === 'ready'} />
+
+        {/* Further parts (checklist, tip card, CTA) will be appended here */}
       </ScrollView>
     </SafeAreaView>
   );
