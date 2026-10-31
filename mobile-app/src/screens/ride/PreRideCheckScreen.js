@@ -9,6 +9,7 @@ import PreRideHeader from '../../components/preRide/PreRideHeader';
 import PreRideTabs from '../../components/preRide/PreRideTabs';
 import ReadinessBanner from '../../components/preRide/ReadinessBanner';
 import SafetyChecklist from '../../components/preRide/SafetyChecklist';
+import RideSafetyTipCard from '../../components/preRide/RideSafetyTipCard';
 
 export default function PreRideCheckScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState('ready');
@@ -57,7 +58,10 @@ export default function PreRideCheckScreen({ navigation }) {
           onContactsPress={handleContacts}
         />
 
-        {/* Further parts (tip card, CTA) will be appended here */}
+        {/* Part 5: Ride Safety Advisory Tip Card */}
+        <RideSafetyTipCard />
+
+        {/* Further parts (CTA button, footnote) will be appended here */}
       </ScrollView>
     </SafeAreaView>
   );
