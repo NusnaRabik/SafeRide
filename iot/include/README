@@ -1,37 +1,51 @@
+# Smart Motorcycle Accident Detection System (SafeRide)
 
-This directory is intended for project header files.
+An IoT-based real-time motorcycle accident detection and emergency response system built using an ESP32 microcontroller, MPU6050 IMU sensor, Touch Sensors, and NEO-M8N GPS module.
 
-A header file is a file containing C declarations and macro definitions
-to be shared between several project source files. You request the use of a
-header file in your project source file (C, C++, etc) located in `src` folder
-by including it, with the C preprocessing directive `#include'.
+---
 
-```src/main.c
+## Features
+* Accident Detection Logic: Combines handle grip status (via touch sensors) and sudden impact detection (via MPU6050 accelerometer) to accurately identify crashes.
+* Real-time GPS Tracking: Integrates a high-precision NEO-M8N GPS module with an external ceramic antenna to fetch precise emergency coordinates (Latitude & Longitude).
+* Object-Oriented Programming (OOP): Modular C++ class design implemented via PlatformIO for clean and maintainable firmware.
+* Serial Telemetry: Live status monitoring (Normal riding vs. Accident state with GPS coordinates) via Serial Monitor.
 
-#include "header.h"
+---
 
-int main (void)
-{
- ...
-}
-```
+## Hardware Components
+* Microcontroller: ESP32 Development Board
+* Motion Sensor: MPU6050 6-axis Accelerometer & Gyroscope
+* GPS Module: u-blox NEO-M8N (with External Ceramic Antenna)
+* Touch Sensors: Handlebar Touch Sensors (Left & Right)
+* Connectivity: Jumper wires, Breadboard / Custom PCB
 
-Including a header file produces the same results as copying the header file
-into each source file that needs it. Such copying would be time-consuming
-and error-prone. With a header file, the related declarations appear
-in only one place. If they need to be changed, they can be changed in one
-place, and programs that include the header file will automatically use the
-new version when next recompiled. The header file eliminates the labor of
-finding and changing all the copies as well as the risk that a failure to
-find one copy will result in inconsistencies within a program.
+---
 
-In C, the convention is to give header files names that end with `.h'.
+## Pinout & Connections
 
-Read more about using header files in official GCC documentation:
+| Component | Sensor Pin | ESP32 Pin |
+| :--- | :--- | :--- |
+| MPU6050 | SDA | GPIO 21 |
+| MPU6050 | SCL | GPIO 22 |
+| MPU6050 / GPS | VCC / GND | 3.3V / 5V & Common GND |
+| Left Touch | SIG | GPIO 4 |
+| Right Touch | SIG | GPIO 5 |
+| NEO-M8N GPS | TX | GPIO 16 (RX2) |
+| NEO-M8N GPS | RX | GPIO 17 (TX2) |
 
-* Include Syntax
-* Include Operation
-* Once-Only Headers
-* Computed Includes
+---
 
-https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html
+## Software & Libraries
+Developed using PlatformIO with the Arduino framework. 
+
+Required libraries (`lib_deps` in `platformio.ini`):
+* `mikalhart/TinyGPSPlus` (v1.0.3 or higher)
+* `electroniccats/MPU6050` (v0.6.0 or higher)
+
+---
+
+## Code Structure
+* `MotionDetector` (C++ Class): Handles MPU6050 initialization and vibration threshold calculations.
+* `TouchDetector` (C++ Class): Monitors handlebar grip states.
+* `GpsSensor` (C++ Class): Manages UART communication and location parsing via TinyGPSPlus.
+* `main.cpp`: Core logic loop combining sensor fusion and emergency state triggers.
