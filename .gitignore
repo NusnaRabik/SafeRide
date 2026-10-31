@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Expo & Mobile
+.expo/
+dist/
+web-build/
+*.orig.*
+
+# Environment & Secret files
+.env
+.env.local
+
+# Debug & Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
