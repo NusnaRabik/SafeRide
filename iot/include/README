@@ -1,14 +1,15 @@
-# Smart Motorcycle Accident Detection System (SafeRide)
+Smart Motorcycle Accident Detection System (SafeRide)
 
-An IoT-based real-time motorcycle accident detection and emergency response system built using an ESP32 microcontroller, MPU6050 IMU sensor, Touch Sensors, and NEO-M8N GPS module.
+An IoT-based real-time motorcycle accident detection and emergency response system built using an ESP32 microcontroller, MPU6050 IMU sensor, Touch Sensors, NEO-M8N GPS module, and Firebase Cloud integration.
 
 ---
 
 ## Features
 * Accident Detection Logic: Combines handle grip status (via touch sensors) and sudden impact detection (via MPU6050 accelerometer) to accurately identify crashes.
 * Real-time GPS Tracking: Integrates a high-precision NEO-M8N GPS module with an external ceramic antenna to fetch precise emergency coordinates (Latitude & Longitude).
+* Cloud & Mobile App Integration: Automatically syncs accident alerts and real-time GPS coordinates to Firebase Realtime Database for remote mobile app monitoring.
 * Object-Oriented Programming (OOP): Modular C++ class design implemented via PlatformIO for clean and maintainable firmware.
-* Serial Telemetry: Live status monitoring (Normal riding vs. Accident state with GPS coordinates) via Serial Monitor.
+* Serial Telemetry: Live status monitoring via Serial Monitor.
 
 ---
 
@@ -41,11 +42,13 @@ Developed using PlatformIO with the Arduino framework.
 Required libraries (`lib_deps` in `platformio.ini`):
 * `mikalhart/TinyGPSPlus` (v1.0.3 or higher)
 * `electroniccats/MPU6050` (v0.6.0 or higher)
+* `mobizt/Firebase ESP32 Client` (v4.4.14 or higher)
 
 ---
 
-## Code Structure
+## Code Structure & Cloud Setup
 * `MotionDetector` (C++ Class): Handles MPU6050 initialization and vibration threshold calculations.
 * `TouchDetector` (C++ Class): Monitors handlebar grip states.
 * `GpsSensor` (C++ Class): Manages UART communication and location parsing via TinyGPSPlus.
-* `main.cpp`: Core logic loop combining sensor fusion and emergency state triggers.
+* `Firebase Manager`: Connects ESP32 to Wi-Fi and pushes emergency coordinates and accident status to Firebase Realtime Database.
+* `main.cpp`: Core logic loop combining sensor fusion, GPS parsing, and cloud emergency triggers.
