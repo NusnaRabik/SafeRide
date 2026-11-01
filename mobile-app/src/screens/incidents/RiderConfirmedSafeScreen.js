@@ -3,18 +3,19 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing } from '../../constants/theme';
 import SafeRideOSHeader from '../../components/confirmedSafe/SafeRideOSHeader';
+import SafetyConfirmedBanner from '../../components/confirmedSafe/SafetyConfirmedBanner';
 
 export default function RiderConfirmedSafeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      {/* Part 1: Top System Status Bar */}
+      
       <SafeRideOSHeader />
 
       <ScrollView
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {/* Parts 2–5 (Banner, Glowing Green Ring, Return CTA, Footer) will be added here */}
+       <SafetyConfirmedBanner />
       </ScrollView>
     </SafeAreaView>
   );
