@@ -8,6 +8,7 @@ import ActiveRideHeader from '../../components/activeRide/ActiveRideHeader';
 import ActiveRideStatusChips from '../../components/activeRide/ActiveRideStatusChips';
 import RideTimerHero from '../../components/activeRide/RideTimerHero';
 import RideMetricsGrid from '../../components/activeRide/RideMetricsGrid';
+import SafetyMonitoringCard from '../../components/activeRide/SafetyMonitoringCard';
 
 export default function ActiveRideScreen({ navigation }) {
   const helmet = useHelmet();
@@ -38,19 +39,16 @@ export default function ActiveRideScreen({ navigation }) {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {/* Part 2: Dual Status Chips */}
+        
         <ActiveRideStatusChips
           helmetConnected={helmet.connected}
           monitoringActive={true}
         />
 
-        {/* Part 3: Primary Ride HUD / Duration Timer */}
         <RideTimerHero seconds={elapsedSeconds} />
-
-        {/* Part 4: 2-Column Glanceable Telemetry Grid */}
         <RideMetricsGrid seconds={elapsedSeconds} distanceKm={0.0} />
-
-        {/* Further parts (safety card, controls) will be appended here */}
+        <SafetyMonitoringCard isActive={true} />
+        
       </ScrollView>
     </SafeAreaView>
   );
