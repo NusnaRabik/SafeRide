@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing } from '../../constants/theme';
 import SafeRideOSHeader from '../../components/confirmedSafe/SafeRideOSHeader';
 import SafetyConfirmedBanner from '../../components/confirmedSafe/SafetyConfirmedBanner';
+import ConfirmedSafeCircle from '../../components/confirmedSafe/ConfirmedSafeCircle';
 
 export default function RiderConfirmedSafeScreen({ navigation }) {
   return (
@@ -16,6 +17,8 @@ export default function RiderConfirmedSafeScreen({ navigation }) {
         showsVerticalScrollIndicator={false}
       >
        <SafetyConfirmedBanner />
+       <ConfirmedSafeCircle />
+       
       </ScrollView>
     </SafeAreaView>
   );
