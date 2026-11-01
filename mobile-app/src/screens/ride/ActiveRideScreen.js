@@ -9,6 +9,7 @@ import ActiveRideStatusChips from '../../components/activeRide/ActiveRideStatusC
 import RideTimerHero from '../../components/activeRide/RideTimerHero';
 import RideMetricsGrid from '../../components/activeRide/RideMetricsGrid';
 import SafetyMonitoringCard from '../../components/activeRide/SafetyMonitoringCard';
+import ActiveRideControls from '../../components/activeRide/ActiveRideControls';
 
 export default function ActiveRideScreen({ navigation }) {
   const helmet = useHelmet();
@@ -32,6 +33,14 @@ export default function ActiveRideScreen({ navigation }) {
     navigation?.navigate('Profile');
   };
 
+  const handleEndRide = () => {
+    navigation?.navigate('Home');
+  };
+
+  const handleSos = () => {
+    navigation?.navigate('AccidentWarning');
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <ActiveRideHeader onBack={handleBack} onProfilePress={handleProfile} />
@@ -48,6 +57,11 @@ export default function ActiveRideScreen({ navigation }) {
         <RideTimerHero seconds={elapsedSeconds} />
         <RideMetricsGrid seconds={elapsedSeconds} distanceKm={0.0} />
         <SafetyMonitoringCard isActive={true} />
+
+        <ActiveRideControls
+          onEndRide={handleEndRide}
+          onSosPress={handleSos}
+        />
         
       </ScrollView>
     </SafeAreaView>
