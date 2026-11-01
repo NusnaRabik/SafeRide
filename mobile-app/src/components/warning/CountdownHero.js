@@ -7,9 +7,11 @@ export default function CountdownHero({ seconds = 30 }) {
 
   return (
     <View style={styles.container}>
+
       {/* Outer Circular Progress Ring */}
       <View style={styles.outerRing}>
         <View style={styles.innerCircle}>
+            
           {/* Giant Countdown Digits */}
           <Text style={styles.digits}>{pad(seconds)}</Text>
 
