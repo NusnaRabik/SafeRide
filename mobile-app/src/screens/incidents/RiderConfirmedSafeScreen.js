@@ -5,6 +5,11 @@ import { colors, spacing } from '../../constants/theme';
 import SafeRideOSHeader from '../../components/confirmedSafe/SafeRideOSHeader';
 import SafetyConfirmedBanner from '../../components/confirmedSafe/SafetyConfirmedBanner';
 import ConfirmedSafeCircle from '../../components/confirmedSafe/ConfirmedSafeCircle';
+import ReturnToRideButton from '../../components/confirmedSafe/ReturnToRideButton';
+
+const handleReturn = () => {
+  navigation?.navigate('ActiveRide');
+};
 
 export default function RiderConfirmedSafeScreen({ navigation }) {
   return (
@@ -18,7 +23,8 @@ export default function RiderConfirmedSafeScreen({ navigation }) {
       >
        <SafetyConfirmedBanner />
        <ConfirmedSafeCircle />
-       
+       <ReturnToRideButton onPress={handleReturn} />
+
       </ScrollView>
     </SafeAreaView>
   );
