@@ -7,6 +7,7 @@ import WarningAlertBanner from '../../components/warning/WarningAlertBanner';
 import WarningHeadline from '../../components/warning/WarningHeadline';
 import CountdownHero from '../../components/warning/CountdownHero';
 import WarningActionButtons from '../../components/warning/WarningActionButtons';
+import WarningFootnote from '../../components/warning/WarningFootnote';
 
 export default function AccidentWarningScreen({ navigation }) {
   const [secondsLeft, setSecondsLeft] = useState(30);
@@ -50,6 +51,8 @@ export default function AccidentWarningScreen({ navigation }) {
             onSafePress={handleSafe}
             onSosPress={handleImmediateSos} 
         />  
+
+        <WarningFootnote />
 
       </ScrollView>
     </SafeAreaView>
