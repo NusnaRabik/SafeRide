@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing } from '../../constants/theme';
@@ -6,9 +6,19 @@ import useHelmet from '../../hooks/useHelmet';
 
 import ActiveRideHeader from '../../components/activeRide/ActiveRideHeader';
 import ActiveRideStatusChips from '../../components/activeRide/ActiveRideStatusChips';
+import RideTimerHero from '../../components/activeRide/RideTimerHero';
 
 export default function ActiveRideScreen({ navigation }) {
   const helmet = useHelmet();
+  const [elapsedSeconds, setElapsedSeconds] = useState(48);
+
+  // Live trip ticker loop
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setElapsedSeconds((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleBack = () => {
     if (navigation?.canGoBack()) {
@@ -33,7 +43,10 @@ export default function ActiveRideScreen({ navigation }) {
           monitoringActive={true}
         />
 
-        {/* Further parts (live timer hero, telemetry grid, safety card, controls) will be appended here */}
+        {/* Part 3: Primary Ride HUD / Duration Timer */}
+        <RideTimerHero seconds={elapsedSeconds} />
+
+        {/* Further parts (metrics grid, safety card, controls) will be appended here */}
       </ScrollView>
     </SafeAreaView>
   );
