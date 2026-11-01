@@ -6,6 +6,7 @@ import { colors, spacing } from '../../constants/theme';
 import WarningAlertBanner from '../../components/warning/WarningAlertBanner';
 import WarningHeadline from '../../components/warning/WarningHeadline';
 import CountdownHero from '../../components/warning/CountdownHero';
+import WarningActionButtons from '../../components/warning/WarningActionButtons';
 
 export default function AccidentWarningScreen({ navigation }) {
   const [secondsLeft, setSecondsLeft] = useState(30);
@@ -22,6 +23,14 @@ export default function AccidentWarningScreen({ navigation }) {
     return () => clearInterval(timer);
   }, [secondsLeft]);
 
+    const handleSafe = () => {
+        navigation?.navigate('RiderConfirmedSafe');
+    };  
+
+    const handleImmediateSos = () => {
+        navigation?.navigate('EmergencyNotificationSent');
+    };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <ScrollView
@@ -36,6 +45,11 @@ export default function AccidentWarningScreen({ navigation }) {
 
         
         <CountdownHero seconds={secondsLeft} />
+       
+        <WarningActionButtons
+            onSafePress={handleSafe}
+            onSosPress={handleImmediateSos} 
+        />  
 
       </ScrollView>
     </SafeAreaView>
