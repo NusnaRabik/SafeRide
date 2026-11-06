@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <FirebaseESP32.h>
 #include "Gyroscopesensor.h"
 #include "Touchsensor.h"
 #include "GpsSensor.h"
