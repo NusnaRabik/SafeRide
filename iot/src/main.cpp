@@ -6,7 +6,9 @@
 #include "Touchsensor.h"
 #include "GpsSensor.h"
 
-
+// Wi-Fi Network Credentials
+#define WIFI_SSID "Dialog 4G 815"
+#define WIFI_PASSWORD "bd7cAe60"
 
 // Firebase Database Credentials (obtained from Firebase console)
 #define FIREBASE_HOST "saferide-60b37-default-rtdb.asia-southeast1.firebasedatabase.app"[cite: 2]
