@@ -6,6 +6,12 @@
 #include "Touchsensor.h"
 #include "GpsSensor.h"
 
+
+
+// Firebase Database Credentials (obtained from Firebase console)
+#define FIREBASE_HOST "saferide-60b37-default-rtdb.asia-southeast1.firebasedatabase.app"[cite: 2]
+#define FIREBASE_AUTH "AIzaSyDm-YYjzWncOF2W3UT5D21x80LngY7bEQY"[cite: 2]
+
 // Instantiate Objects
 MotionDetector bikeSensor(1.0);      // MPU6050 vibration threshold
 TouchDetector leftTouch(4);         // Left Handle Touch Sensor on GPIO 4
