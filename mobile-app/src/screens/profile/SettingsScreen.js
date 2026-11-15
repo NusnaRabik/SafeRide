@@ -1,11 +1,11 @@
 import React from 'react';
-import { ScrollView, View, Text, Linking, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Linking, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { colors, fonts, spacing } from '../../constants/theme';
 import useSettings from '../../hooks/useSettings';
 
-import ScreenHeader from '../../components/common/ScreenHeader';
 import SectionLabel from '../../components/common/SectionLabel';
 import SectionCard from '../../components/common/SectionCard';
 import ToggleRow from '../../components/settings/ToggleRow';
@@ -16,12 +16,14 @@ import AboutCard from '../../components/settings/AboutCard';
 export default function SettingsScreen({ navigation }) {
   const { settings, setSetting } = useSettings();
 
-  // Opens this app's page in the phone's system settings
   const openSystemSettings = () => Linking.openSettings();
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScreenHeader title="Settings" centered largeTitle onBack={() => navigation?.goBack()} />
+      {/* Back button row */}
+      <TouchableOpacity style={styles.backBtn} onPress={() => navigation?.goBack()} accessibilityLabel="Back">
+        <MaterialIcons name="arrow-back" size={24} color={colors.primary} />
+      </TouchableOpacity>
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.intro}>
@@ -83,8 +85,12 @@ export default function SettingsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.md, paddingBottom: 48, gap: spacing.lg },
-  intro: { paddingTop: spacing.sm, gap: 4 },
+  backBtn: {
+    width: 48, height: 48, alignItems: 'center', justifyContent: 'center',
+    marginLeft: spacing.xs, marginTop: 4,
+  },
+  content: { paddingHorizontal: spacing.md, paddingBottom: 48, gap: spacing.lg },
+  intro: { paddingTop: spacing.xs, gap: 4 },
   heading: { fontFamily: fonts.manropeBold, fontSize: 28, lineHeight: 36, letterSpacing: -0.5, color: colors.primary },
   subtitle: { fontFamily: fonts.body, fontSize: 16, lineHeight: 24, color: colors.onSurfaceVariant },
   section: { gap: spacing.xs },

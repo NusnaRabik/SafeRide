@@ -42,8 +42,8 @@ export default function ProfileScreen({ navigation }) {
   const handleLogoutConfirm = useCallback(async () => {
     await signOut();
     setLogoutVisible(false);
-    // TODO: navigation.reset({ index: 0, routes: [{ name: 'Login' }] })
-  }, [signOut]);
+    navigation?.reset({ index: 0, routes: [{ name: 'Welcome' }] }); // ← FIXED
+  }, [signOut, navigation]);
 
   return (
     <SafeAreaView style={styles.root} edges={['top']}>

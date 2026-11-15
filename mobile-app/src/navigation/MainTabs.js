@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -6,7 +7,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { colors, fonts } from '../constants/theme';
 import HomeScreen from '../screens/home/HomeScreen';
-import RideHistoryScreen from '../screens/ride/RideHistoryScreen';
 import AccidentHistoryScreen from '../screens/incidents/AccidentHistoryScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 
@@ -17,12 +17,18 @@ const HAS_UNREAD_ALERTS = true;
 
 const TABS = [
   { name: 'Home', label: 'Home', icon: 'home', component: HomeScreen },
-  { name: 'Ride', label: 'Ride', icon: 'speed', component: RideHistoryScreen },
-  { name: 'Alerts', label: 'Alerts', icon: 'warning', component: AccidentHistoryScreen, badge: HAS_UNREAD_ALERTS },
+  { name: 'Ride', label: 'Ride', icon: 'speed' },
+  {
+    name: 'Alerts',
+    label: 'Alerts',
+    icon: 'warning',
+    component: AccidentHistoryScreen,
+    badge: HAS_UNREAD_ALERTS,
+  },
   { name: 'Profile', label: 'Profile', icon: 'person', component: ProfileScreen },
 ];
 
-export default function MainTabs() {
+export default function MainTabs({ navigation }) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -49,10 +55,30 @@ export default function MainTabs() {
         <Tab.Screen
           key={t.name}
           name={t.name}
-          component={t.component}
+          component={t.component || HomeScreen}
+          listeners={
+            t.name === 'Ride'
+              ? {
+                  tabPress: (e) => {
+                    e.preventDefault();
+                    navigation.navigate('PreRideCheck');
+                  },
+                }
+              : undefined
+          }
           options={{
             tabBarLabel: ({ focused, color }) => (
-              <Text style={[styles.label, { color, fontFamily: focused ? fonts.manropeBold : fonts.manropeSemi }]}>
+              <Text
+                style={[
+                  styles.label,
+                  {
+                    color,
+                    fontFamily: focused
+                      ? fonts.manropeBold
+                      : fonts.manropeSemi,
+                  },
+                ]}
+              >
                 {t.label}
               </Text>
             ),
@@ -70,9 +96,20 @@ export default function MainTabs() {
 }
 
 const styles = StyleSheet.create({
-  label: { fontSize: 12, letterSpacing: 0.5, marginTop: 2 },
+  label: {
+    fontSize: 12,
+    letterSpacing: 0.5,
+    marginTop: 2,
+  },
   dot: {
-    position: 'absolute', top: 0, right: 0, width: 8, height: 8, borderRadius: 4,
-    backgroundColor: colors.error, borderWidth: 2, borderColor: colors.background,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.error,
+    borderWidth: 2,
+    borderColor: colors.background,
   },
 });
