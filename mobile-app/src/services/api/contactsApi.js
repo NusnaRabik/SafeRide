@@ -1,4 +1,5 @@
-// In-memory mock API for contacts. Connects to backend endpoints once ready.
+// Temporary in-memory "API". Replace each function body with a real HTTPS call
+// (axios/fetch) to the backend later; the hook and screens will not need to change.
 import { PRIORITY } from '../../constants/priorities';
 
 let db = [
@@ -25,4 +26,3 @@ export const removeContact = (id) => {
   db = db.filter((c) => c.id !== id);
   return delay(true);
 };
-

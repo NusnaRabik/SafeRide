@@ -40,4 +40,3 @@ export default function useContacts() {
 
   return { contacts, loading, addContact, editContact, deleteContact };
 }
-
